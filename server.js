@@ -27,7 +27,13 @@ app.get("/", (req, res) => {
 /**
  * Route pour récupérer tous les livres
  */
-
+app.get("/livres", (req, res) =>{
+  const requete = "SELECT * FROM Livres";
+  connection.query(requete, (err, results) => {
+      if(err) throw err;
+      res.json(results)
+  });
+});
 
 
 /**

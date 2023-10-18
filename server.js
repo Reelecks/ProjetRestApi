@@ -24,7 +24,35 @@ app.get("/", (req, res) => {
   res.send("server ready");
 });
 
+/**
+ * Route pour récupérer tous les livres
+ */
 
+
+
+/**
+ * Route pour créer un livre
+ */
+
+
+/**
+ * Route pour modifier un livre
+ */
+
+
+/**
+ * Route pour supprimer un livre
+ */
+
+
+
+/**
+ * Affichez la liste des utilisateurs ayant emprunté un livre
+ */
+
+/**
+ * Affichez la liste des livres disponibles dans une catégorie spécifique (celle que vous voulez= Fantasy).
+ */
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });

@@ -66,10 +66,20 @@ app.delete("/livres/:ISBN", (req, res) => {
 /**
  * Affichez la liste des utilisateurs ayant emprunté un livre
  */
+app.get("/emprunts", (req, res) => {
+  const requete = " SELECT Utilisateurs.Nom FROM Utilisateurs JOIN Emprunts ON(Emprunts.UtilisateurID = Utilisateurs.ID);"
+  ;
+  connection.query(requete, (err, results) => {
+      if (err) throw err;
+      res.json(results);
+  });
+});
 
 /**
  * Affichez la liste des livres disponibles dans une catégorie spécifique (celle que vous voulez= Fantasy).
  */
+
+
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });

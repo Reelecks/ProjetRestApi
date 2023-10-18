@@ -1,0 +1,42 @@
+# API Bibliothèque
+
+Cette API permet de gérer une bibliothèque, en offrant des fonctionnalités CRUD pour chaque table de la base de données.
+
+## Prérequis
+
+- Node.js
+- MySQL
+
+## Mise en place
+
+1. **Clonage du dépôt**:
+
+git clone https://github.com/Reelecks/ProjetRestApi
+
+
+2. **Installation des dépendances**:
+Accédez au dossier du projet, puis installez les dépendances nécessaires.
+
+cd dossier_du_projet
+npm install
+
+
+3. **Configuration de la base de données**:
+
+Faire fichier `.env` et mettez à jour les variables suivantes avec vos propres informations de configuration:
+
+DB_USER=VotreNomUtilisateur
+DB_PASSWORD=VotreMotDePasse
+PORT=VotrePort
+
+
+
+4. **Importation de la base de données**:
+
+Importez le fichier `biblio.sql` dans votre système de gestion de base de données MySQL.
+
+5. **Démarrage de l'API**:
+
+node server.js
+
+6. **Liste des routes**:

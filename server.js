@@ -36,10 +36,21 @@ app.get("/livres", (req, res) =>{
 });
 
 
+
 /**
  * Route pour créer un livre
  */
-
+app.post("/livres", (req, res) => {
+    const {ISBN, Titre, AuteurID, AnneePublication, QuantiteDisponible, CategorieID, EditeurId} = req.body;
+    const sql = "INSERT INTO livres (ISBN, Titre, AuteurID, AnneePublication, QuantiteDisponible, CategorieID, EditeurId) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    connection.query(sql, [ISBN, Titre, AuteurID, AnneePublication, QuantiteDisponible, CategorieID, EditeurId], (err, results) => {
+        if (err) {
+            res.status(500).send('Erreur lors de la création du livre');
+            return;
+        }
+        res.status(201).send({ ...req.body });
+    });
+});
 
 /**
  * Route pour modifier un livre

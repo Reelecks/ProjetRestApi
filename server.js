@@ -87,8 +87,17 @@ app.get("/emprunts", (req, res) => {
 });
 
 /**
- * Affichez la liste des livres disponibles dans une catégorie spécifique (celle que vous voulez= Fantasy).
+ * Affichez la liste des livres disponibles dans une catégorie spécifique (celle que vous voulez= Roman).
  */
+app.get("/livres/disponibles/:nomCategorie", (req, res) => {
+  const livreCat = req.params.nomCategorie;
+  const requete = " SELECT Livres.Titre FROM Livres JOIN Categories ON(Livres.CategorieID = Categories.ID) WHERE Livres.ISBN NOT IN(SELECT Livres.ISBN FROM Livres JOIN Emprunts ON(Emprunts.LivreISBN = Livres.ISBN )) AND NomCategorie = ?;"
+  ;
+  connection.query(requete, [livreCat], (err, results) => {
+      if (err) throw err;
+      res.json(results);
+  });
+});
 
 
 app.listen(PORT, () => {

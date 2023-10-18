@@ -99,6 +99,19 @@ app.get("/livres/disponibles/:nomCategorie", (req, res) => {
   });
 });
 
+/**
+ * Procédure stockée 
+ */
+app.get("/emprunts/retards", (req, res) => {
+  const requete = "call RendusEnRetards();"
+  ;
+  connection.query(requete, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+});
+});
+
+
 
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);

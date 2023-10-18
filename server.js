@@ -55,7 +55,32 @@ app.post("/livres", (req, res) => {
 /**
  * Route pour modifier un livre
  */
+app.put("/livres/:id", (req, res) => {
+  const isbnLivre = req.params.id;
+  const { Titre, AuteurID, AnneePublication, QuantiteDisponible, CategorieID, EditeurID } = req.body;
 
+  const updatedBookData = `
+    UPDATE Livres
+    SET Titre = ?,
+        AuteurID = ?,
+        AnneePublication = ?,
+        QuantiteDisponible = ?,
+        CategorieID = ?,
+        EditeurID = ?
+    WHERE ISBN = ?;`;
+
+  connection.query(
+    updatedBookData,
+    [Titre, AuteurID, AnneePublication, QuantiteDisponible, CategorieID, EditeurID, isbnLivre],
+    (err, results) => {
+      if (err) {
+        console.error("Error updating book", err);
+      } else {
+        res.json({ message: "Book updated successfully" });
+      }
+    }
+  );
+});
 
 /**
  * Route pour supprimer un livre

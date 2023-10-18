@@ -49,7 +49,18 @@ app.get("/livres", (req, res) =>{
 /**
  * Route pour supprimer un livre
  */
-
+app.delete("/livres/:ISBN", (req, res) => {
+  const livreISBN = req.params.ISBN;
+  const requete = "DELETE FROM Livres WHERE ISBN = ?"
+  connection.query(requete, [livreISBN], (err, result) => {
+    if(err) throw err;
+    if (result.affectedRows === 1) {
+      res.json({ message: "Livre supprimé", id: livreISBN });
+    } else {
+      res.status(404).json({ error: "Livre non trouvé" });
+    }
+  });
+});
 
 
 /**

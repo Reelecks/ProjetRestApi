@@ -6,7 +6,7 @@ const livreRouteur = express.Router();
 /**
  * Route pour récupérer tous les livres
  */
-livreRouteur.get("/livres", (req, res) =>{
+livreRouteur.get("/", (req, res) =>{
     const requete = "SELECT * FROM Livres";
     connection.query(requete, (err, results) => {
         if(err) throw err;
@@ -19,7 +19,7 @@ livreRouteur.get("/livres", (req, res) =>{
   /**
    * Route pour créer un livre
    */
-  livreRouteur.post("/livres", (req, res) => {
+  livreRouteur.post("/", (req, res) => {
       const {ISBN, Titre, AuteurID, AnneePublication, QuantiteDisponible, CategorieID, EditeurId} = req.body;
       const sql = "INSERT INTO livres (ISBN, Titre, AuteurID, AnneePublication, QuantiteDisponible, CategorieID, EditeurId) VALUES (?, ?, ?, ?, ?, ?, ?)";
       connection.query(sql, [ISBN, Titre, AuteurID, AnneePublication, QuantiteDisponible, CategorieID, EditeurId], (err, results) => {
@@ -34,7 +34,7 @@ livreRouteur.get("/livres", (req, res) =>{
   /**
    * Route pour modifier un livre
    */
-  livreRouteur.put("/livres/:id", (req, res) => {
+  livreRouteur.put("/:id", (req, res) => {
     const isbnLivre = req.params.id;
     const { Titre, AuteurID, AnneePublication, QuantiteDisponible, CategorieID, EditeurID } = req.body;
   
@@ -64,7 +64,7 @@ livreRouteur.get("/livres", (req, res) =>{
   /**
    * Route pour supprimer un livre
    */
-  livreRouteur.delete("/livres/:ISBN", (req, res) => {
+  livreRouteur.delete("/:ISBN", (req, res) => {
     const livreISBN = req.params.ISBN;
     const requete = "DELETE FROM Livres WHERE ISBN = ?"
     connection.query(requete, [livreISBN], (err, result) => {
@@ -93,7 +93,7 @@ livreRouteur.get("/livres", (req, res) =>{
   /**
    * Affichez la liste des livres disponibles dans une catégorie spécifique (celle que vous voulez= Roman).
    */
-  livreRouteur.get("/livres/disponibles/:nomCategorie", (req, res) => {
+  livreRouteur.get("/disponibles/:nomCategorie", (req, res) => {
     const livreCat = req.params.nomCategorie;
     const requete = " SELECT Livres.Titre FROM Livres JOIN Categories ON(Livres.CategorieID = Categories.ID) WHERE Livres.ISBN NOT IN(SELECT Livres.ISBN FROM Livres JOIN Emprunts ON(Emprunts.LivreISBN = Livres.ISBN )) AND NomCategorie = ?;"
     ;

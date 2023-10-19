@@ -31,27 +31,74 @@
 .a-list-livre-btn{
     text-decoration: none;
 }
-.btn-delete-livre{
-    padding: 10px;
-    background-color: rgb(189, 44, 36);
-    color: #ffffff;
-    border-radius: 10px;
-    border: none;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+
+.button {
+    position: relative;
+    width: 150px;
+    height: 40px;
     cursor: pointer;
-}
-.delete-btn-livre{
+    display: flex;
+    align-items: center;
+    border: 1px solid #cc0000;
+    background-color: #e50000;
+    overflow: hidden;
+  }
+  
+  .button, .button__icon, .button__text {
+    transition: all 0.3s;
+  }
+  
+  .button .button__text {
+    transform: translateX(35px);
+    color: #fff;
+    font-weight: 600;
+  }
+  
+  .button .button__icon {
+    position: absolute;
+    transform: translateX(109px);
+    height: 100%;
+    width: 39px;
+    background-color: #cc0000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .button .svg {
+    width: 20px;
+  }
+  
+  .button:hover {
+    background: #cc0000;
+  }
+  
+  .button:hover .button__text {
+    color: transparent;
+  }
+  
+  .button:hover .button__icon {
+    width: 148px;
+    transform: translateX(0);
+  }
+  
+  .button:active .button__icon {
+    background-color: #b20000;
+  }
+  
+  .button:active {
+    border: 1px solid #b20000;
+  }
+
+  .button-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: auto;
-    height: 10px;
-    background-color: rgb(235, 80, 80);
-    color: #ffffff; 
-    border-radius: 10px;
-    border: none;
-    padding:15px;
-    cursor: pointer;
-    text-decoration: none;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-}
+  }
+  
+  .button {
+    width: 150px;
+    margin: 0 10px; /* Espace entre les boutons */
+  }
+  
+  

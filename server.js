@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors"; 
 import utilisateurRouteur from "./routes/routeUtilisateur.js";
 import categorieRouteur from "./routes/routeCategorie.js";
 import editeurRouteur from "./routes/routeEditeur.js";
@@ -10,6 +11,12 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
+// app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+}));
+
 
 const PORT = process.env.PORT || 3000;
 

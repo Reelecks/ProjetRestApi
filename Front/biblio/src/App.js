@@ -5,6 +5,7 @@ import Sidebar from './components/Sidebar/Sidebar';
 import ListLivre from './Pages/ListLivres/ListLivre';
 import DeleteLivre from './Pages/DeleteLivre/DeleteLivre';
 import LivreById from './Pages/LivreById/LivreById';
+import ListUtilisateurs from './Pages/Utilisateurs/ListUtilisateurs';
 
 const App = () => {
   return (
@@ -16,6 +17,8 @@ const App = () => {
           <Route path="/livres" element={<ListLivre/>} />
           <Route path="/delete-livres/:isbn" element={<DeleteLivre/>} />
           <Route path="/livres/:isbn" element={<LivreById/>} />
+          <Route path="/utilisateurs" element={<ListUtilisateurs/>} />
+
         </Routes>
       </div>
     </Router>

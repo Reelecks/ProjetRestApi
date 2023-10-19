@@ -25,23 +25,7 @@ livreRouteur.get("/disponibles", (req, res) =>{
   });
 });
 
-/**
- * Route pour récupérer un livre by ISBN
- */
-livreRouteur.get("/:ISBN", (req, res) => {
-  const livreISBN = req.params.ISBN;
-  const requete = "SELECT * FROM Livres WHERE ISBN = ?";
-  
-  connection.query(requete, [livreISBN], (err, results) => {
-    if (err) {
-      res.status(500).json({ error: "Erreur lors de la récupération du livre par ISBN" });
-    } else if (results.length === 0) {
-      res.status(404).json({ error: "Aucun livre trouvé avec cet ISBN" });
-    } else {
-      res.json(results[0]);
-    }
-  });
-});
+
 
 /**
  * Route pour créer un livre
@@ -139,4 +123,22 @@ livreRouteur.get("/emprunts/retards", (req, res) => {
 });
 });
   
+
+/**
+ * Route pour récupérer un livre by ISBN
+ */
+livreRouteur.get("/:ISBN", (req, res) => {
+  const livreISBN = req.params.ISBN;
+  const requete = "SELECT * FROM Livres WHERE ISBN = ?";
+  
+  connection.query(requete, [livreISBN], (err, results) => {
+    if (err) {
+      res.status(500).json({ error: "Erreur lors de la récupération du livre par ISBN" });
+    } else if (results.length === 0) {
+      res.status(404).json({ error: "Aucun livre trouvé avec cet ISBN" });
+    } else {
+      res.json(results[0]);
+    }
+  });
+});
   export default livreRouteur;

@@ -124,6 +124,8 @@ livreRouteur.get("/disponibles/:nomCategorie", (req, res) => {
   });
 });
 
+
+
 /**
  * Procédure stockée 
  */
@@ -135,6 +137,21 @@ livreRouteur.get("/emprunts/retards", (req, res) => {
 });
 });
   
+/**
+ * Route pour umprunter un livre
+ */
+livreRouteur.put("/emprunter/:ISBN", (req, res) => {
+  const livreISBN = req.params.ISBN;
+  const { UtilisateurID, DateEmprunt} = req.body;
+  const requete = "INSERT INTO Emprunts (UtilisateurID, LivreISBN, DateEmprunt) VALUES (?, ?, ?)";
+  connection.query(requete, [UtilisateurID, livreISBN, DateEmprunt], (err, results) => {
+    if (err) {
+      res.status(500).send('Erreur lors de l\'emprunt du livre');
+      return;
+    }
+    res.status(201).send({ ...req.body });
+  });
+});
 
 /**
  * Route pour récupérer un livre by ISBN

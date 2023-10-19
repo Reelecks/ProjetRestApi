@@ -6,6 +6,7 @@ import ListLivre from './Pages/ListLivres/ListLivre';
 import DeleteLivre from './Pages/DeleteLivre/DeleteLivre';
 import LivreById from './Pages/LivreById/LivreById';
 import ListUtilisateurs from './Pages/Utilisateurs/ListUtilisateurs';
+import Retards from './Pages/Retards/Retards';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/delete/:isbn" element={<DeleteLivre/>} />
           <Route path="/livres/:isbn" element={<LivreById/>} />
           <Route path="/utilisateurs" element={<ListUtilisateurs/>} />
+          <Route path="/retards" element={<Retards/>} />
 
         </Routes>
       </div>

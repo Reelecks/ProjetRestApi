@@ -13,6 +13,9 @@ const Sidebar = () => {
           <li className="li-sidebar">
               <Link className="a-sidebar" to="/utilisateurs">Utilisateurs</Link>
           </li>
+          <li className="li-sidebar">
+              <Link className="a-sidebar" to="/retards">Retards</Link>
+          </li>
       </ul>
     </div>
   );

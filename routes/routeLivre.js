@@ -13,9 +13,31 @@ livreRouteur.get("/", (req, res) =>{
         res.json(results)
     });
   });
-  
-  
-  
+
+  livreRouteur.get("/disponibles", (req, res) =>{
+    const requete = "SELECT * FROM Livres WHERE QuantiteDisponible > 0";
+    connection.query(requete, (err, results) => {
+        if(err) throw err;
+        res.json(results)
+    });
+  });
+  //========================================
+  livreRouteur.get("/:ISBN", (req, res) => {
+    const livreISBN = req.params.ISBN;
+    const requete = "SELECT * FROM Livres WHERE ISBN = ?";
+    
+    connection.query(requete, [livreISBN], (err, results) => {
+      if (err) {
+        console.error("Erreur lors de la récupération du livre par ISBN:", err);
+        res.status(500).json({ error: "Erreur lors de la récupération du livre par ISBN" });
+      } else if (results.length === 0) {
+        res.status(404).json({ error: "Aucun livre trouvé avec cet ISBN" });
+      } else {
+        res.json(results[0]);
+      }
+    });
+});
+
   /**
    * Route pour créer un livre
    */
@@ -53,9 +75,9 @@ livreRouteur.get("/", (req, res) =>{
       [Titre, AuteurID, AnneePublication, QuantiteDisponible, CategorieID, EditeurID, isbnLivre],
       (err, results) => {
         if (err) {
-          console.error("Error updating book", err);
+          console.error("Erreur lors de la mise à jour du livre", err);
         } else {
-          res.json({ message: "Book updated successfully" });
+          res.json({ message: "Mise à jour effectuée avec succès" });
         }
       }
     );
@@ -64,7 +86,7 @@ livreRouteur.get("/", (req, res) =>{
   /**
    * Route pour supprimer un livre
    */
-  livreRouteur.delete("/:ISBN", (req, res) => {
+  livreRouteur.delete("livre/:ISBN", (req, res) => {
     const livreISBN = req.params.ISBN;
     const requete = "DELETE FROM Livres WHERE ISBN = ?"
     connection.query(requete, [livreISBN], (err, result) => {

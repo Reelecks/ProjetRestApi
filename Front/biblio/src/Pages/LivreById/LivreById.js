@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import ModifyLivre from '../../components/PopUp/ModifyLivre';
 import axios from 'axios';
 import './LivreById.css';
 
 const LivreById = () => {
+    const navigate = useNavigate();
     const { isbn } = useParams();
     const [livreData, setLivreData] = useState({});
     const [auteurs, setAuteurs] = useState([]);
@@ -39,6 +40,16 @@ const LivreById = () => {
         fetchData();
     }, [isbn, reload]);
 
+    const handleDelete = (ISBN) => {
+      axios.delete(`http://localhost:4000/livres/delete/${ISBN}`)
+        .then(response => {
+          navigate('/livres');
+        })
+        .catch(error => {
+          console.error('Erreur de suppression', error);
+        });
+    };
+
     const findNameById = (type, id) => {
       if (type === 'auteur') {
           const found = auteurs.find(item => item.ID === id);
@@ -72,7 +83,7 @@ const LivreById = () => {
                         <div className="button-container">
                             <div className="button-wrapper"> 
                               <Link to={`/delete-livre/${livreData.ISBN}`}>
-                                <button className="button" type="button">
+                                <button className="button" type="button" onClick={() => handleDelete(livreData.ISBN)}>
                                   <span className="button__text">Delete</span>
                                   <span className="button__icon"><svg className="svg" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><title></title><path d="M112,112l20,320c.95,18.49,14.4,32,32,32H348c17.67,0,30.87-13.51,32-32l20-320" styles="fill:none;stroke:#ffffff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></path><line styles="stroke:#ffffff;stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px" x1="80" x2="432" y1="112" y2="112"></line><path d="M192,112V72h0a23.93,23.93,0,0,1,24-24h80a23.93,23.93,0,0,1,24,24h0v40" styles="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></path><line styles="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" x1="256" x2="256" y1="176" y2="400"></line><line styles="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" x1="184" x2="192" y1="176" y2="400"></line><line styles="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" x1="328" x2="320" y1="176" y2="400"></line></svg></span>
                                 </button>

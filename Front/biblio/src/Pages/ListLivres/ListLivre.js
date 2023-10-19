@@ -136,8 +136,7 @@ const ListLivre = () => {
                 <h2 className='text-start'>{livre.Titre}</h2>
 
                 <div className='btn-livres-list'>
-                    <button className='btn-delete-livre' onClick={() => handleDelete(livre.ISBN)} > Supprimer
-                    </button>
+                    <button className='btn-delete-livre' onClick={() => handleDelete(livre.ISBN)} >Supprimer</button>
 
                     <Link to={`/livres/${livre.ISBN}`}>
                       <button className='btn-edit-livre'>En savoir plus</button>

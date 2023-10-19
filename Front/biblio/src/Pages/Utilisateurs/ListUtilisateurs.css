@@ -1,0 +1,7 @@
+/* CSS pour supprimer les puces de la liste */
+.ul-utilisateurs {
+    list-style-type: none; /* Supprime les puces */
+    padding: 0; /* Supprime le padding par défaut de la liste */
+    margin: 0; /* Supprime le margin par défaut de la liste */
+  }
+  

@@ -101,11 +101,23 @@ livreRouteur.get("/emprunts", (req, res) => {
 });
 
 /**
+ * Affichez la liste des livres dans une catégorie spécifique (celle que vous voulez ).
+ */
+livreRouteur.get("/all/:nomCategorie", (req, res) => {
+  const livreCat = req.params.nomCategorie;
+  const requete = " SELECT Livres.Titre FROM Livres JOIN Categories ON(Livres.CategorieID = Categories.ID) WHERE NomCategorie = ?"
+  connection.query(requete, [livreCat], (err, results) => {
+      if (err) throw err;
+      res.json(results);
+  });
+});
+
+/**
  * Affichez la liste des livres disponibles dans une catégorie spécifique (celle que vous voulez= Roman).
  */
 livreRouteur.get("/disponibles/:nomCategorie", (req, res) => {
   const livreCat = req.params.nomCategorie;
-  const requete = " SELECT Livres.Titre FROM Livres JOIN Categories ON(Livres.CategorieID = Categories.ID) WHERE Livres.ISBN NOT IN(SELECT Livres.ISBN FROM Livres JOIN Emprunts ON(Emprunts.LivreISBN = Livres.ISBN )) AND NomCategorie = ?"
+  const requete = " SELECT Livres.Titre FROM Livres JOIN Categories ON(Livres.CategorieID = Categories.ID) WHERE Livres.QuantiteDisponible > 0 AND NomCategorie = ?"
   connection.query(requete, [livreCat], (err, results) => {
       if (err) throw err;
       res.json(results);

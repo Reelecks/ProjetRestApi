@@ -9,6 +9,7 @@ const ListLivre = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [checked, setChecked] = useState(false);
   const [showAddLivre, setShowAddLivre] = useState(false);
 
   useEffect(() => {
@@ -22,11 +23,18 @@ const ListLivre = () => {
   }, []);
 
   useEffect(() => {
-    let url = 'http://localhost:4000/livres/disponibles';
-    if (selectedCategory) {
-      url = `http://localhost:4000/livres/disponibles/${selectedCategory}`;
+    let url = 'http://localhost:4000/livres';
+    if(checked){
+      url = 'http://localhost:4000/livres/disponibles';
+      if (selectedCategory) {
+        url = `http://localhost:4000/livres/disponibles/${selectedCategory}`;
+      }
+    }else{
+      url = 'http://localhost:4000/livres';
+      if (selectedCategory) {
+        url = `http://localhost:4000/livres/all/${selectedCategory}`;
+      }
     }
-  
     axios.get(url)
       .then(response => {
         setLivres(response.data);
@@ -36,7 +44,7 @@ const ListLivre = () => {
         console.error('Erreur de chargement des livres', error);
         setIsLoading(false);
       });
-  }, [selectedCategory]);
+  }, [checked, selectedCategory ]);
 
   const loadLivres = () => {
     let url = 'http://localhost:4000/livres/disponibles';
@@ -103,6 +111,17 @@ const ListLivre = () => {
               <option key={categorie.ID} value={categorie.NomCategorie}>{categorie.NomCategorie}</option>
             ))}
           </select>
+        </div>
+
+        <div>
+          <label>
+            <input
+              type="checkbox"
+              checked={checked}
+              onChange={(e) => setChecked(e.target.checked)}
+            />
+            Disponible
+          </label>
         </div>
 
       {isLoading ? (

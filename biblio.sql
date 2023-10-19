@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 18 oct. 2023 à 15:20
+-- Généré le : jeu. 19 oct. 2023 à 13:25
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `emprunts` (
   PRIMARY KEY (`ID`),
   KEY `LivreISBN` (`LivreISBN`),
   KEY `UtilisateurID` (`UtilisateurID`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `emprunts`
@@ -164,32 +164,30 @@ INSERT INTO `emprunts` (`ID`, `LivreISBN`, `UtilisateurID`, `DateEmprunt`, `Date
 (6, '9781451673319', 8, '2023-07-20', '2023-08-20'),
 (7, '9780141442427', 9, '2023-08-25', '2023-09-25'),
 (8, '9780451524935', 10, '2023-09-01', '2023-10-01'),
-(9, '9780544003415', 11, '2023-09-05', '2023-10-05');
+(9, '9780544003415', 11, '2023-09-05', '2023-10-05'),
+(22, '9782013233707', 3, '2023-10-07', '2023-10-21'),
+(21, '9782013233707', 2, '2023-10-05', '2023-10-19'),
+(20, '9782013233707', 7, '2023-10-07', '2023-10-21'),
+(19, '9782013233707', 1, '2023-10-06', '2023-10-20'),
+(18, '9782013233707', 1, '2023-09-27', '2023-10-11');
 
 --
 -- Déclencheurs `emprunts`
 --
 DROP TRIGGER IF EXISTS `SetDateRetourPrevu`;
 DELIMITER $$
-CREATE TRIGGER SetDateRetourPrevu
-BEFORE INSERT ON Emprunts
-FOR EACH ROW
-BEGIN
+CREATE TRIGGER `SetDateRetourPrevu` BEFORE INSERT ON `emprunts` FOR EACH ROW BEGIN
     SET NEW.DateRetourPrevu = DATE_ADD(NEW.DateEmprunt, INTERVAL 14 DAY);
-END;
+END
 $$
 DELIMITER ;
-
 DROP TRIGGER IF EXISTS `SetQuantiteLivreAfterEmprunt`;
 DELIMITER $$
-CREATE TRIGGER SetQuantiteLivreAfterEmprunt
-AFTER INSERT ON Emprunts
-FOR EACH ROW
-BEGIN 
+CREATE TRIGGER `SetQuantiteLivreAfterEmprunt` AFTER INSERT ON `emprunts` FOR EACH ROW BEGIN 
     UPDATE Livres
     SET QuantiteDisponible = QuantiteDisponible - 1
     WHERE ISBN = NEW.LivreISBN;
-END;
+END
 $$
 DELIMITER ;
 
@@ -219,7 +217,7 @@ CREATE TABLE IF NOT EXISTS `livres` (
 --
 
 INSERT INTO `livres` (`ISBN`, `Titre`, `AuteurID`, `AnneePublication`, `QuantiteDisponible`, `CategorieID`, `EditeurID`) VALUES
-('9782013233707', 'Vingt mille lieues sous les mers', 1, 1870, 10, 2, 1),
+('9782013233707', 'Vingt mille lieues sous les mers', 1, 1870, 7, 7, 7),
 ('9782070408055', 'Les Misérables', 2, 1862, 5, 1, 1),
 ('9782070369561', 'L\'Étranger', 3, 1942, 8, 1, 3),
 ('9780141441146', '1984', 4, 1949, 7, 1, 4),

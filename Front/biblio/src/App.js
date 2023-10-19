@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import '../src/App.css';
+import Sidebar from './components/Sidebar/Sidebar';
+import ListLivre from './Pages/ListLivres/ListLivre';
+import DeleteLivre from './Pages/DeleteLivre/DeleteLivre';
+import LivreById from './Pages/LivreById/LivreById';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="app">
+        <Sidebar />
+        <Routes>
+          {/* <Route path="/" element={<ListLivre/>} /> */}
+          <Route path="/livres" element={<ListLivre/>} />
+          <Route path="/delte-livres/:isbn" element={<DeleteLivre/>} />
+          <Route path="/livres/:isbn" element={<LivreById/>} />
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
+

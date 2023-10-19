@@ -1,0 +1,71 @@
+
+.container-list-livres{
+    width: 100%;
+    position: relative;
+    overflow-y: scroll;
+}
+.title-page{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.li-list-livres{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: start;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    border: 1px solid rgb(233, 233, 233) ;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+}
+.title-livre{
+    text-align: start;
+}
+.btn-livre-list{
+    display: flex;
+    flex-direction: row;
+    column-gap: 30px;
+}
+.btn-edit-livre{
+    padding: 10px;
+    background-color: rgb(38, 94, 250);
+    color: #ffffff;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+}
+.btn-delete-livre{
+    background-color: rgb(235, 80, 80);
+    color: #ffffff; 
+    border-radius: 10px;
+    border: none;
+    padding:10px;
+    cursor: pointer;
+}
+.header-list-livre{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 50px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.btn-add-livre{
+    padding: 10px;
+    background-color: rgb(38, 94, 250);
+    color: #ffffff;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+}

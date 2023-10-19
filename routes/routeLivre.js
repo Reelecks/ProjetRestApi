@@ -91,7 +91,7 @@ livreRouteur.put("/:id", (req, res) => {
 /**
  * Route pour supprimer un livre
  */
-livreRouteur.delete("delete-livre/:ISBN", (req, res) => {
+livreRouteur.delete("/delete/:ISBN", (req, res) => {
   const livreISBN = req.params.ISBN;
   const requete = "DELETE FROM Livres WHERE ISBN = ?"
   connection.query(requete, [livreISBN], (err, result) => {

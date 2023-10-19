@@ -8,6 +8,7 @@ const ListLivre = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     axios.get('http://localhost:4000/categories')
@@ -35,6 +36,18 @@ const ListLivre = () => {
         setIsLoading(false);
       });
   }, [selectedCategory]);
+
+  const handleDelete = (ISBN) => {
+    setIsDeleting(true);
+    axios.delete(`http://localhost:4000/livres/delete/${ISBN}`)
+      .then(response => {
+      setIsDeleting(false);
+      })
+      .catch(error => {
+      console.error('Erreur de suppression', error);
+      setIsDeleting(false);
+      });
+  };
 
   return (
     <div className='container-list-livres'>
@@ -66,13 +79,13 @@ const ListLivre = () => {
                 <h2 className='text-start'>{livre.Titre}</h2>
 
                 <div className='btn-livres-list'>
-                    <Link to={`/delete-livre/${livre.ISBN}`}>
-                      <button className='btn-delete-livre'>Supprimer le livre</button>
-                    </Link>
+                    <button className='btn-delete-livre' onClick={() => handleDelete(livre.ISBN)} disabled={isDeleting}>
+                      {isDeleting ? 'Suppression...' : 'Suppression'}
+                    </button>
 
-                  <Link to={`/livres/${livre.ISBN}`}>
-                    <button className='btn-edit-livre'>En savoir plus</button>
-                  </Link>
+                    <Link to={`/livres/${livre.ISBN}`}>
+                      <button className='btn-edit-livre'>En savoir plus</button>
+                    </Link>
                 </div>
               </li>
             ))}

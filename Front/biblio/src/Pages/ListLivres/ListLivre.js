@@ -9,7 +9,6 @@ const ListLivre = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
   const [showAddLivre, setShowAddLivre] = useState(false);
 
   useEffect(() => {
@@ -39,15 +38,31 @@ const ListLivre = () => {
       });
   }, [selectedCategory]);
 
-  const handleDelete = (ISBN) => {
-    setIsDeleting(true);
-    axios.delete(`http://localhost:4000/livres/delete/${ISBN}`)
+  const loadLivres = () => {
+    let url = 'http://localhost:4000/livres/disponibles';
+    if (selectedCategory) {
+      url = `http://localhost:4000/livres/disponibles/${selectedCategory}`;
+    }
+  
+    axios.get(url)
       .then(response => {
-      setIsDeleting(false);
+        setLivres(response.data);
+        setIsLoading(false);
       })
       .catch(error => {
-      console.error('Erreur de suppression', error);
-      setIsDeleting(false);
+        console.error('Erreur de chargement des livres', error);
+        setIsLoading(false);
+      });
+  };
+  
+
+  const handleDelete = (ISBN) => {
+    axios.delete(`http://localhost:4000/livres/delete/${ISBN}`)
+      .then(response => {
+        loadLivres();
+      })
+      .catch(error => {
+        console.error('Erreur de suppression', error);
       });
   };
 
@@ -82,8 +97,7 @@ const ListLivre = () => {
                 <h2 className='text-start'>{livre.Titre}</h2>
 
                 <div className='btn-livres-list'>
-                    <button className='btn-delete-livre' onClick={() => handleDelete(livre.ISBN)} disabled={isDeleting}>
-                      {isDeleting ? 'Suppression...' : 'Suppression'}
+                    <button className='btn-delete-livre' onClick={() => handleDelete(livre.ISBN)} > Supprimer
                     </button>
 
                     <Link to={`/livres/${livre.ISBN}`}>

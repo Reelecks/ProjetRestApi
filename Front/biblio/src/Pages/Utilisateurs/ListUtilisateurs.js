@@ -5,7 +5,6 @@ import './ListUtilisateurs.css';
 
 const ListUtilisateurs = () => {
   const [utilisateurs, setUtilisateurs] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
 
   useEffect(() => {
@@ -19,25 +18,20 @@ const ListUtilisateurs = () => {
   }, []);
 
   return (
+
     <div className='container-list-livres'>
       <div className='header-list-livres'>
-        <h1 className='title-page'>Liste des utilisateurs</h1>
-
-      {isLoading ? (
-        <p>Chargement...</p>
-      ) : (
+        <h1 className='title-page'>Liste des utilisateurs qui ont emprunté un livre</h1>
         <div>
           <ul>
             {utilisateurs.map(utilisateur => (
-              <li className='li-list-livres' key={utilisateur.ID}>
-                <h2 className='text-start'>{utilisateur.Nom}</h2>
-                <h2 className='text-start'>{utilisateur.Prenom}</h2>
+              <li>
+                <li className='list-utilisateurs' key={utilisateur.ID}></li>
+                <h2 className='nom-utilisateurs'>{utilisateur.Nom}</h2>     
               </li>
             ))}
           </ul>
-
         </div>
-      )}
       </div>
     </div>
   );

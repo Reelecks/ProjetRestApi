@@ -6,9 +6,26 @@ import './ListLivre.css';
 const ListLivre = () => {
   const [livres, setLivres] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:4000/livres/disponibles')
+    axios.get('http://localhost:4000/categories')
+      .then(response => {
+        setCategories(response.data);
+      })
+      .catch(error => {
+        console.error('Erreur de chargement des catégories', error);
+      });
+  }, []);
+
+  useEffect(() => {
+    let url = 'http://localhost:4000/livres/disponibles';
+    if (selectedCategory) {
+      url = `http://localhost:4000/livres/disponibles/${selectedCategory}`;
+    }
+  
+    axios.get(url)
       .then(response => {
         setLivres(response.data);
         setIsLoading(false);
@@ -17,16 +34,26 @@ const ListLivre = () => {
         console.error('Erreur de chargement des livres', error);
         setIsLoading(false);
       });
-  }, []);
+  }, [selectedCategory]);
 
   return (
     <div className='container-list-livres'>
       <div className='header-list-livres'>
         <h1 className='title-page'>Liste des livres</h1>
         <div>
-          <Link to="/add-">
+          <Link to="/add-livre">
             <button className='btn-add-livre'>Ajouter un livre</button>
           </Link>
+        </div>
+
+        <div>
+          <label>Sélectionner une catégorie :</label>
+          <select id="categorySelect" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+            <option value="">Sélectionner une catégorie</option>
+            {categories.map(categorie => (
+              <option key={categorie.ID} value={categorie.NomCategorie}>{categorie.NomCategorie}</option>
+            ))}
+          </select>
         </div>
 
       {isLoading ? (

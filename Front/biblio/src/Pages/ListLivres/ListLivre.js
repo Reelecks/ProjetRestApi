@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import AddLivre from '../../components/PopUp/AddLivre';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './ListLivre.css';
@@ -8,6 +9,7 @@ const ListLivre = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [showAddLivre, setShowAddLivre] = useState(false);
 
   useEffect(() => {
     axios.get('http://localhost:4000/categories')
@@ -40,10 +42,11 @@ const ListLivre = () => {
     <div className='container-list-livres'>
       <div className='header-list-livres'>
         <h1 className='title-page'>Liste des livres</h1>
-        <div>
-          <Link to="/add-livre">
-            <button className='btn-add-livre'>Ajouter un livre</button>
-          </Link>
+        <div>   
+          <button className='btn-add-livre' onClick={() => setShowAddLivre(true)}>
+            Ajouter un livre
+          </button>
+        {showAddLivre && <AddLivre onClose={() => setShowAddLivre(false)} />}
         </div>
 
         <div>

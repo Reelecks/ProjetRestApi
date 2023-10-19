@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AddLivre from '../../components/PopUp/AddLivre';
+import EmprunterLivre from '../../components/PopUp/EmprunterLivre';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './ListLivre.css';
@@ -10,6 +11,7 @@ const ListLivre = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
+  const [showEmprunterLivre, setShowEmprunterLivre] = useState(false);
   const [showAddLivre, setShowAddLivre] = useState(false);
 
   useEffect(() => {
@@ -107,6 +109,9 @@ const ListLivre = () => {
                     <Link to={`/livres/${livre.ISBN}`}>
                       <button className='btn-edit-livre'>En savoir plus</button>
                     </Link>
+                    <button className='btn-take-livre' onClick={() => setShowEmprunterLivre(livre.ISBN)}>Emprunter</button>
+                    {showEmprunterLivre && <EmprunterLivre ISBN={showEmprunterLivre} onClose={() => setShowEmprunterLivre(false)} />}
+
                 </div>
               </li>
             ))}

@@ -1,0 +1,57 @@
+*{
+    text-align: center;
+}
+.livre{
+    width: 100%;
+    position: relative;
+    overflow-y: scroll;
+}
+.livre-header-list{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    align-items: center;
+}
+.ul-list-livre{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 30px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: none;
+    list-style-type: none;
+    padding:0;
+}
+.a-list-livre-btn{
+    text-decoration: none;
+}
+.btn-delete-livre{
+    padding: 10px;
+    background-color: rgb(189, 44, 36);
+    color: #ffffff;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+}
+.delete-btn-livre{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 10px;
+    background-color: rgb(235, 80, 80);
+    color: #ffffff; 
+    border-radius: 10px;
+    border: none;
+    padding:15px;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}

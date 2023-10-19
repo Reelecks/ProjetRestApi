@@ -177,7 +177,19 @@ FOR EACH ROW
 BEGIN
     SET NEW.DateRetourPrevu = DATE_ADD(NEW.DateEmprunt, INTERVAL 14 DAY);
 END;
+$$
+DELIMITER ;
 
+DROP TRIGGER IF EXISTS `SetQuantiteLivreAfterEmprunt`;
+DELIMITER $$
+CREATE TRIGGER SetQuantiteLivreAfterEmprunt
+AFTER INSERT ON Emprunts
+FOR EACH ROW
+BEGIN 
+    UPDATE Livres
+    SET QuantiteDisponible = QuantiteDisponible - 1
+    WHERE ISBN = NEW.LivreISBN;
+END;
 $$
 DELIMITER ;
 

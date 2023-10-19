@@ -1,6 +1,6 @@
 # API Bibliothèque
 
-Cette API permet de gérer une bibliothèque, en offrant des fonctionnalités CRUD pour chaque table de la base de données.
+Cette repo contient une API  qui permet de gérer une bibliothèque, en offrant des fonctionnalités CRUD pour chaque table de la base de données. Il contient aussi un frontend fait en React permettant de gérer les livres 
 
 ## Prérequis
 
@@ -20,10 +20,13 @@ Accédez au dossier du projet, puis installez les dépendances nécessaires.
 cd dossier_du_projet
 npm install
 
+cd front/biblio
+npm install
+
 
 3. **Configuration de la base de données**:
 
-Faire fichier `.env` et mettez à jour les variables suivantes avec vos propres informations de configuration:
+Faire fichier `.env` a la racine et mettez à jour les variables suivantes avec vos propres informations de configuration:
 
 DB_USER=VotreNomUtilisateur
 DB_PASSWORD=VotreMotDePasse
@@ -35,9 +38,13 @@ PORT=VotrePort
 
 Importez le fichier `biblio.sql` dans votre système de gestion de base de données MySQL.
 
-5. **Démarrage de l'API**:
-
+5. **Démarrage de l'API et du Front**:
+A la racine du projet : 
 node server.js
+
+Dans front/biblio 
+npm run start
+
 
 6. **Liste des routes**:
 

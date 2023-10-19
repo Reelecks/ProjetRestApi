@@ -93,7 +93,7 @@ livreRouteur.delete("/delete/:ISBN", (req, res) => {
  * Affichez la liste des utilisateurs ayant emprunté un livre
  */
 livreRouteur.get("/emprunts", (req, res) => {
-  const requete = " SELECT Utilisateurs.Nom, Utilisateurs.ID FROM Utilisateurs JOIN Emprunts ON(Emprunts.UtilisateurID = Utilisateurs.ID);"
+  const requete = " SELECT Utilisateurs.Nom, Utilisateurs.ID, Utilisateurs.Prenom FROM Utilisateurs JOIN Emprunts ON(Emprunts.UtilisateurID = Utilisateurs.ID) GROUP BY Utilisateurs.ID;"
   connection.query(requete, (err, results) => {
       if (err) throw err;
       res.json(results);

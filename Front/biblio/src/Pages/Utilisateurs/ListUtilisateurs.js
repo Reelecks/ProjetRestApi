@@ -21,13 +21,13 @@ const ListUtilisateurs = () => {
   return (
     <div className='container-list-livres'>
       <div className='header-list-livres'>
-        <h1 className='title-page'>Liste des utilisateurs</h1>
+        <h1 className='title-page'>Liste des utilisateurs ayant emprunté un livre</h1>
 
         <div>
           <ul>
             {utilisateurs.map(utilisateur => (
               <li className='li-list-livres' key={utilisateur.ID}>
-                <h2 className='text-start'>{utilisateur.Nom}</h2>
+                <h2 className='text-start'>{utilisateur.Nom} {utilisateur.Prenom}</h2>
               </li>
             ))}
           </ul>

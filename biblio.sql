@@ -171,11 +171,13 @@ INSERT INTO `emprunts` (`ID`, `LivreISBN`, `UtilisateurID`, `DateEmprunt`, `Date
 --
 DROP TRIGGER IF EXISTS `SetDateRetourPrevu`;
 DELIMITER $$
-CREATE TRIGGER `SetDateRetourPrevu` AFTER INSERT ON `emprunts` FOR EACH ROW BEGIN
-    UPDATE Emprunts
-    SET DateRetourPrevu = DATE_ADD(NEW.DateEmprunt, INTERVAL 1 MONTH)
-    WHERE ID = NEW.ID;
-END
+CREATE TRIGGER SetDateRetourPrevu
+BEFORE INSERT ON Emprunts
+FOR EACH ROW
+BEGIN
+    SET NEW.DateRetourPrevu = DATE_ADD(NEW.DateEmprunt, INTERVAL 14 DAY);
+END;
+
 $$
 DELIMITER ;
 

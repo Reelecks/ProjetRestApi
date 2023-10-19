@@ -25,8 +25,8 @@ DELIMITER $$
 --
 -- Procédures
 --
-DROP PROCEDURE IF EXISTS `EmpruntsEnRetard`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `EmpruntsEnRetard` ()   BEGIN
+DROP PROCEDURE IF EXISTS `RendusEnRetards`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `RendusEnRetards` ()   BEGIN
     SELECT * FROM Emprunts
     WHERE CURDATE() > DateRetourPrevu;
 END$$

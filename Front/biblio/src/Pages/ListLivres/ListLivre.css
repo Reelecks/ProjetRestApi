@@ -1,7 +1,9 @@
 
 .container-list-livres{
-    width: 100%;
-    position: relative;
+    width: 80%;
+    position: absolute;
+    top: 0;
+    right: 0;
     overflow-y: scroll;
 }
 .title-page{

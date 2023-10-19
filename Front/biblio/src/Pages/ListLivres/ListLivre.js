@@ -66,6 +66,23 @@ const ListLivre = () => {
       });
   };
 
+  const refreshLivresList = () => {
+    let url = 'http://localhost:4000/livres/disponibles';
+    if (selectedCategory) {
+      url = `http://localhost:4000/livres/disponibles/${selectedCategory}`;
+    }
+
+    axios.get(url)
+      .then(response => {
+        setLivres(response.data);
+        setIsLoading(false);
+      })
+      .catch(error => {
+        console.error('Erreur de chargement des livres', error);
+        setIsLoading(false);
+      });
+}
+
   return (
     <div className='container-list-livres'>
       <div className='header-list-livres'>
@@ -74,7 +91,8 @@ const ListLivre = () => {
           <button className='btn-add-livre' onClick={() => setShowAddLivre(true)}>
             Ajouter un livre
           </button>
-        {showAddLivre && <AddLivre onClose={() => setShowAddLivre(false)} />}
+          {showAddLivre && <AddLivre onClose={() => setShowAddLivre(false)} onLivreAdded={refreshLivresList} />}
+
         </div>
 
         <div>

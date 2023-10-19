@@ -2,9 +2,10 @@
     text-align: center;
 }
 .livre{
-    width: 100%;
-    position: relative;
-    overflow-y: scroll;
+  width: 80%;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 .livre-header-list{
     display: flex;

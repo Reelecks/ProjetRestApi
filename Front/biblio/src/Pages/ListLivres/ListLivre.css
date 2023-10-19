@@ -34,13 +34,24 @@
 .btn-livre-list{
     display: flex;
     flex-direction: row;
-    column-gap: 30px;
+    align-items: center;
 }
 .btn-edit-livre{
     padding: 10px;
     background-color: rgb(38, 94, 250);
     color: #ffffff;
     border-radius: 10px;
+    margin-left: 10px;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+}
+.btn-take-livre{
+    padding: 10px;
+    background-color: rgb(38, 250, 176);
+    color: #ffffff;
+    border-radius: 10px;
+    margin-left: 10px;
     border: none;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
     cursor: pointer;

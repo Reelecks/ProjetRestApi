@@ -72,7 +72,8 @@ const LivreById = () => {
                 <p>Chargement...</p>
             ) : (
                 <div>
-                    <ul>
+                    <ul className='ul-list-livre'>
+                      <li className='li-list-livres'>
                         <p><strong>Titre : </strong>{livreData.Titre}</p>
                         <p><strong>Auteur : </strong>{livreData.AuteurID} - {findNameById('auteur', livreData.AuteurID)}</p>
                         <p><strong>Année de publication : </strong>{livreData.AnneePublication}</p>
@@ -94,6 +95,7 @@ const LivreById = () => {
                                 {showModifyLivre && <ModifyLivre livre={livreData} onClose={() => setShowModifyLivre(false)} onModified={() => setReload(prev => !prev)}/>}
                             </div>
                         </div>
+                      </li>
                     </ul>
                 </div>
             )}

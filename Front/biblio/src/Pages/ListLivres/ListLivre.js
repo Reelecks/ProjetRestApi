@@ -107,7 +107,7 @@ const ListLivre = () => {
 
         <div>
           <label>Sélectionner une catégorie :</label>
-          <select id="categorySelect" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+          <select select className='select-add-course' value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
             <option value="">Sélectionner une catégorie</option>
             {categories.map(categorie => (
               <option key={categorie.ID} value={categorie.NomCategorie}>{categorie.NomCategorie}</option>
@@ -117,12 +117,12 @@ const ListLivre = () => {
 
         <div>
           <label>
+             Disponible
             <input
               type="checkbox"
               checked={checked}
               onChange={(e) => setChecked(e.target.checked)}
             />
-            Disponible
           </label>
         </div>
 

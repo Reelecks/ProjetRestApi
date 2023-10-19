@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import '../src/App.css';
 import Sidebar from './components/Sidebar/Sidebar';
 import ListLivre from './Pages/ListLivres/ListLivre';
-import DeleteLivre from './Pages/DeleteLivre/DeleteLivre';
 import LivreById from './Pages/LivreById/LivreById';
 import ListUtilisateurs from './Pages/Utilisateurs/ListUtilisateurs';
 import Retards from './Pages/Retards/Retards';
@@ -14,9 +13,8 @@ const App = () => {
       <div className="app">
         <Sidebar />
         <Routes>
-          {/* <Route path="/" element={<ListLivre/>} /> */}
+          <Route path="/" element={<ListLivre/>} />
           <Route path="/livres" element={<ListLivre/>} />
-          <Route path="/delete/:isbn" element={<DeleteLivre/>} />
           <Route path="/livres/:isbn" element={<LivreById/>} />
           <Route path="/utilisateurs" element={<ListUtilisateurs/>} />
           <Route path="/retards" element={<Retards/>} />
